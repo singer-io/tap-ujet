@@ -136,7 +136,8 @@ This tap:
     ```
     Pylint test resulted in the following score:
     ```bash
-    Your code has been rated at 9.73/10
+    TBD LATER
+    Your code has been rated at TBD/10
     ```
 
     To [check the tap](https://github.com/singer-io/singer-tools#singer-check-tap) and verify working:
@@ -146,6 +147,8 @@ This tap:
     ```
     Check tap resulted in the following:
     ```bash
+    TBD LATER
+
     The output is valid.
     It contained 127 messages for 10 streams.
 
@@ -157,16 +160,7 @@ This tap:
     +---------------------+---------+---------+
     | stream              | records | schemas |
     +---------------------+---------+---------+
-    | company_attributes  | 20      | 1       |
-    | customer_attributes | 41      | 1       |
-    | admins              | 3       | 1       |
-    | users               | 5       | 1       |
-    | segments            | 5       | 1       |
-    | tags                | 7       | 1       |
-    | companies           | 3       | 1       |
-    | company_segments    | 4       | 1       |
-    | leads               | 4       | 1       |
-    | teams               | 0       | 1       |
+    | TBD                 | 99      | 1       |
     +---------------------+---------+---------+
     ```
 ---
