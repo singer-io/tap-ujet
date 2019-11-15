@@ -1,0 +1,319 @@
+{
+  "additionalProperties": false,
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "selected_menu": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "parent_id": {
+          "type": [
+            "null",
+            "integer"
+          ]
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "menu_type": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "id": {
+          "type": [
+            "null",
+            "integer"
+          ]
+        },
+        "position": {
+          "type": [
+            "null",
+            "integer"
+          ]
+        },
+        "output_msg": {
+          "type": "null"
+        },
+        "deleted": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "end_user": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "id": {
+          "type": [
+            "null",
+            "integer"
+          ]
+        },
+        "identifier": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "out_contact_id": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "fail_reason": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "chat_duration": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "offer_type": {
+      "type": ["null", "string"]
+    },
+    "out_ticket_url": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "uri"
+    },
+    "participants": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "chat_id": {
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "fail_reason": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "chat_duration": {
+                "type": "null"
+              },
+              "finished_at": {
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "format": "date-time"
+              },
+              "connected_at": {
+                "type": "null"
+              },
+              "user_id": {
+                "type": "null"
+              },
+              "id": {
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "status": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "end_user_id": {
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "type": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "longest_response_time": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "has_feedback": {
+      "type": "boolean"
+    },
+    "transcript": {
+      "type": "boolean"
+    },
+    "id": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "wait_duration": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "rating": {
+      "type": "null"
+    },
+    "status": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "offer_events": {
+      "type": "array",
+      "items": {}
+    },
+    "assigned_at": {
+      "type": "null"
+    },
+    "created_at": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "message_count": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "videos": {
+      "type": "array",
+      "items": {}
+    },
+    "lang": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "transfers": {
+      "type": "array",
+      "items": {}
+    },
+    "chat_type": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "first_msg_sent_at": {
+      "type": "null"
+    },
+    "out_ticket_id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "updated_at": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "agent_info": {
+      "type": "null"
+    },
+    "verified": {
+      "type": "boolean"
+    },
+    "last_msg_sent_at": {
+      "type": "null"
+    },
+    "menu_path": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "items_count": {
+          "type": [
+            "null",
+            "integer"
+          ]
+        },
+        "name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "materialized_path": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "average_response_time": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "photos": {
+      "type": "array",
+      "items": {}
+    },
+    "ends_at": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

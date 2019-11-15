@@ -58,11 +58,12 @@ STREAMS = {
             'sort_direction': 'ASC'
         }
     },
-    'menus': {
+    'menu_tree': {
+        'path': 'menus/tree',
         'key_properties': ['id'],
         'replication_method': 'FULL_TABLE',
     },
-    'menu_tree': {
+    'menus': {
         'key_properties': ['id'],
         'replication_method': 'FULL_TABLE',
     },
@@ -71,6 +72,7 @@ STREAMS = {
         'replication_method': 'FULL_TABLE',
     },
     'team_tree': {
+        'path': 'teams/tree',
         'key_properties': ['id'],
         'replication_method': 'FULL_TABLE',
     },

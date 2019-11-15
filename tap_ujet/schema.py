@@ -16,7 +16,10 @@ def get_schemas():
     for stream_name, stream_metadata in STREAMS.items():
         schema_path = get_abs_path('schemas/{}.json'.format(stream_name))
         with open(schema_path) as file:
-            schema = json.load(file)
+            try: 
+                schema = json.load(file)
+            except:
+                print("Failed json.load for file:", file)
         schemas[stream_name] = schema
         mdata = metadata.new()
 

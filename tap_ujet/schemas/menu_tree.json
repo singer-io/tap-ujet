@@ -1,0 +1,39 @@
+{
+  "additionalProperties": false,
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "agents_count": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "deleted": {
+      "type": "boolean"
+    },
+    "id": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "parent_id": {
+      "type": "null"
+    },
+    "position": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    }
+  }
+}

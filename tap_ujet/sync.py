@@ -70,7 +70,7 @@ def process_records(catalog, #pylint: disable=too-many-branches
     stream_metadata = metadata.to_map(stream.metadata)
 
     with metrics.record_counter(stream_name) as counter:
-        for record in records:
+        for record in records.get(stream_name):
             # If child object, add parent_id to record
             if parent_id and parent:
                 record[parent + '_id'] = parent_id
@@ -202,19 +202,19 @@ def sync_endpoint(client, #pylint: disable=too-many-branches
             transformed_data = transform_json(data_dict, stream_name, data_key)
         else:
             transformed_data = transform_json(data, stream_name, data_key)
-        # LOGGER.info('transformed_data = {}'.format(transformed_data))  # TESTING, comment out
+        LOGGER.info('transformed_data = {}'.format(transformed_data))  # TESTING, comment out
         if not transformed_data or transformed_data is None:
             LOGGER.info('No transformed data for data = {}'.format(data))
             return total_records # No data results
         # Verify key id_fields are present
         rec_count = 0
-        for record in transformed_data:
-            for key in id_fields:
-                if not record.get(key):
-                    LOGGER.info('Stream: {}, Missing key {} in record: {}'.format(
-                        stream_name, key, record))
-                    raise RuntimeError
-            rec_count = rec_count + 1
+        # for record in transformed_data.get(data_key):
+        #     for key in id_fields:
+        #         if not record.get(key):
+        #             LOGGER.info('Stream: {}, Missing key {} in record: {}'.format(
+        #                 stream_name, key, record))
+        #             raise RuntimeError
+        #     rec_count = rec_count + 1
 
         # Process records and get the max_bookmark_value and record_count for the set of records
         max_bookmark_value, record_count = process_records(
@@ -233,13 +233,13 @@ def sync_endpoint(client, #pylint: disable=too-many-branches
             stream_name, record_count))
 
         # set total_records and next_url for pagination
-        total_count = data.get('total_count', 0)
-        if total_count == 0:
-            total_records = total_records + rec_count
-        else:
-            total_records = total_count
+        # total_count = data.get('total_count', 0)
+        # if total_count == 0:
+        #     total_records = total_records + rec_count
+        # else:
+        #     total_records = total_count
 
-        next_url = data.get('pages', {}).get('next', None)
+        # next_url = data.get('pages', {}).get('next', None)
 
         # Update the state with the max_bookmark_value for the stream
         if bookmark_field:

@@ -14,7 +14,7 @@ LOGGER = singer.get_logger()
 REQUIRED_CONFIG_KEYS = [
     'company_key',
     'company_secret',
-    'subdomaim',
+    'subdomain',
     'domain',
     'start_date',
     'user_agent',
