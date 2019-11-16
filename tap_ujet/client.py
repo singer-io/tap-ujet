@@ -2,7 +2,7 @@ import re
 import backoff
 import requests
 from requests.exceptions import ConnectionError
-from singer import metrics
+from singer import metrics, utils
 import singer
 
 LOGGER = singer.get_logger()
@@ -157,6 +157,8 @@ class UjetClient(object):
                           (Server5xxError, ConnectionError, Server429Error),
                           max_tries=7,
                           factor=3)
+    # Todo: document
+    @utils.ratelimit(1, 1)
     def request(self, method, path=None, url=None, json=None, version=None, **kwargs):
         if not self.__verified:
             self.__verified = self.check_access()
@@ -202,18 +204,22 @@ class UjetClient(object):
 
         # pagination details are returned in the header: total, per-page, next url
         total_records = int(response.headers.get('total', 0))
-        per_page = total_records = int(response.headers.get('per-page', 0))
-        links = response.headers.get('link').split(',')
-        next_url = None
-        for link in links:
-            try:
-                url, rel = re.search(r'^\<(https.*)\>; rel\=\"(.*)\"$', link.strip()).groups()
-                if rel == 'next':
-                    next_url = url
-            except AttributeError:
-                next_url = None
 
-        return response.json(), total_records, per_page, next_url
+        # Not returning currently due to client API bug
+        per_page = total_records = int(response.headers.get('per-page', 0))
+        next_url = None
+        if ((response.headers.get('link') is not None ) and ('link' in response.headers)):
+            links = response.headers.get('link').split(',')
+            next_url = None
+            for link in links:
+                try:
+                    url, rel = re.search(r'^\<(https.*)\>; rel\=\"(.*)\"$', link.strip()).groups()
+                    if rel == 'next':
+                        next_url = url
+                except AttributeError:
+                    next_url = None
+
+        return response.json(), total_records, next_url
 
     def get(self, path, **kwargs):
         return self.request('GET', path=path, **kwargs)

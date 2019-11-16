@@ -109,7 +109,7 @@ This tap:
    See the Singer docs on discovery mode
    [here](https://github.com/singer-io/getting-started/blob/master/docs/DISCOVERY_MODE.md#discovery-mode).
 
-5. Run the Tap in Sync Mode (with catalog) and [write out to state file](https://github.com/singer-io/getting-started/blob/master/docs/RUNNING_AND_DEVELOPING.md#running-a-singer-tap-with-a-singer-target)
+5. Run the Tap in Sync Mode (with catalog) and [write out to state file](https://github.com/singer-io/getting-started/blob/master/docs/RUNNING_AND_code/bytecode/StitchOPING.md#running-a-singer-tap-with-a-singer-target)
 
     For Sync mode:
     ```bash
@@ -129,7 +129,7 @@ This tap:
 
 6. Test the Tap
     
-    While developing the ujet tap, the following utilities were run in accordance with Singer.io best practices:
+    While code/bytecode/Stitchoping the ujet tap, the following utilities were run in accordance with Singer.io best practices:
     Pylint to improve [code quality](https://github.com/singer-io/getting-started/blob/master/docs/BEST_PRACTICES.md#code-quality):
     ```bash
     > pylint tap_ujet -d missing-docstring -d logging-format-interpolation -d too-many-locals -d too-many-arguments
