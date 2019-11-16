@@ -1,88 +1,59 @@
 {
-  "type": [
-    "null",
-    "object"
-  ],
+  "type": ["null", "object"],
   "additionalProperties": false,
   "properties": {
     "name": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": ["null", "string"]
     },
     "agents_count": {
-      "type": [
-        "null",
-        "integer"
-      ]
+      "type": ["null", "integer"]
     },
     "parent_id": {
       "type": "null"
     },
     "assignees": {
-      "type": "array",
-      "items": {
-        "type": [
-          "null",
-          "object"
-        ],
-        "properties": {
-          "first_name": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "name": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "agent_number": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "id": {
-            "type": [
-              "null",
-              "integer"
-            ]
-          },
-          "last_name": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "avatar_url": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "uri"
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": ["null", "object"],
+            "additionalProperties": false,
+            "properties": {
+              "first_name": {
+                "type": ["null", "string"]
+              },
+              "name": {
+                "type": ["null", "string"]
+              },
+              "agent_number": {
+                "type": ["string", "null"]
+              },
+              "id": {
+                "type": ["null", "integer"]
+              },
+              "last_name": {
+                "type": ["null", "string"]
+              },
+              "avatar_url": {
+                "type": ["null", "string"],
+                "format": "uri"
+              }
+            }
           }
         },
-        "additionalProperties": false
-      }
+        {
+          "type": "null"
+        }
+      ]
     },
     "id": {
-      "type": [
-        "null",
-        "integer"
-      ]
+      "type": ["null", "integer"]
     },
     "position": {
-      "type": [
-        "null",
-        "integer"
-      ]
+      "type": ["null", "integer"]
     },
     "deleted": {
-      "type": "boolean"
+      "type": ["null", "boolean"]
     }
   }
 }

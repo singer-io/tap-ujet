@@ -3,150 +3,97 @@
   "additionalProperties": false,
   "properties": {
     "agent_number": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": ["null", "string"]
     },
     "avatar_url": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": ["null", "string"]
     },
     "call_count": {
-      "type": [
-        "null",
-        "integer"
-      ]
+      "type": ["null", "integer"]
     },
     "channels": {
-      "items": {
-        "properties": {
-          "channel_type": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "menu": {
-            "properties": {
-              "deleted": {
-                "type": "boolean"
-              },
-              "hidden": {
-                "type": "boolean"
-              },
-              "id": {
-                "type": [
-                  "null",
-                  "integer"
-                ]
-              },
-              "menu_type": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "name": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "output_msg": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
-              "parent_id": {
-                "type": "null"
-              },
-              "position": {
-                "type": [
-                  "null",
-                  "integer"
-                ]
-              }
+      "anyOf": [
+        {
+          "type": ["null", "array"],
+          "items": {
+            "channel_type": {
+              "type": ["null", "string"]
             },
-            "type": [
-              "null",
-              "object"
-            ]
+            "menu": {
+              "properties": {
+                "deleted": {
+                  "type": ["null", "boolean"]
+                },
+                "hidden": {
+                  "type": ["null", "boolean"]
+                },
+                "id": {
+                  "type": ["null", "integer"]
+                },
+                "menu_type": {
+                  "type": ["null", "string"]
+                },
+                "name": {
+                  "type": ["null", "string"]
+                },
+                "output_msg": {
+                  "type": ["null", "string"]
+                },
+                "parent_id": {
+                  "type": ["null", "integer"]
+                },
+                "position": {
+                  "type": ["null", "integer"]
+                }
+              },
+              "type": ["null", "object"]
+            }
           }
         },
-        "type": [
-          "null",
-          "object"
-        ]
-      },
-      "type": "array"
+        {
+          "type": "null"
+        }
+      ]
     },
     "chat_count": {
-      "type": [
-        "null",
-        "integer"
-      ]
+      "type": ["null", "integer"]
     },
     "created_at": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": ["null", "string"]
     },
     "crm_authenticated": {
       "type": "boolean"
     },
     "email": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": ["null", "string"]
     },
     "first_name": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": ["null", "string"]
     },
     "id": {
-      "type": [
-        "null",
-        "integer"
-      ]
+      "type": ["null", "integer"]
     },
     "last_login_time": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": ["null", "string"]
     },
     "last_name": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": ["null", "string"]
     },
     "location": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": ["null", "string"]
     },
     "middle_name": {
-      "type": "null"
+      "type": ["null", "string"]
     },
     "online": {
-      "type": "boolean"
+      "type": ["null", "boolean"]
     },
     "roles": {
       "anyOf": [
         {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": ["null", "string"]
           }
         },
         {
@@ -157,82 +104,50 @@
     "status": {
       "properties": {
         "color": {
-          "type": [
-            "null",
-            "string"
-          ]
+          "type": ["null", "string"]
         },
         "id": {
-          "type": [
-            "null",
-            "integer"
-          ]
+          "type": ["null", "integer"]
         },
         "name": {
-          "type": [
-            "null",
-            "string"
-          ]
+          "type": ["null", "string"]
         },
         "wfm_id": {
-          "type": [
-            "null",
-            "integer"
-          ]
+          "type": ["null", "integer"]
         }
       },
-      "type": [
-        "null",
-        "object"
-      ]
+      "type": ["null", "object"]
     },
     "status_updated_at": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": ["null", "string"]
     },
     "teams": {
       "anyOf": [
         {
           "type": "array",
           "items": {
+            "type": ["null", "object"],
+            "additionalProperties": false,
             "properties": {
               "agents_count": {
-                "type": [
-                  "null",
-                  "integer"
-                ]
+                "type": ["null", "integer"]
               },
               "deleted": {
-                "type": "boolean"
+                "type": ["null", "boolean"]
               },
               "id": {
-                "type": [
-                  "null",
-                  "integer"
-                ]
+                "type": ["null", "integer"]
               },
               "name": {
-                "type": [
-                  "null",
-                  "string"
-                ]
+                "type": ["null", "string"]
               },
               "parent_id": {
-                "type": "null"
+                "type": ["null", "integer"]
               },
               "position": {
-                "type": [
-                  "null",
-                  "integer"
-                ]
+                "type": ["null", "integer"]
               }
-            },
-            "type": [
-              "null",
-              "object"
-            ]
+            }
           }
         },
         {
@@ -241,7 +156,7 @@
       ]
     },
     "wrap_up": {
-      "type": "boolean"
+      "type": ["null", "boolean"]
     }
   }
 }

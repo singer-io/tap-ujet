@@ -9,16 +9,10 @@
       "type": ["null", "string"]
     },
     "color": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": ["null", "string"]
     },
     "wfm_id": {
-      "type": [
-        "null",
-        "integer"
-      ]
+      "type": ["null", "integer"]
     }
   }
 }

@@ -1,40 +1,29 @@
-# EXAMPLE TRANSFORMATION FOR DENESTING A NODE
-# De-nest each list node up to record level
-def denest_list_nodes(this_json, data_key, list_nodes):
-    new_json = this_json
-    i = 0
-    # for record in list(this_json.get(data_key, [])):
-    for record in list(this_json.get(data_key)):
-        for list_node in list_nodes:
-            # this_node = record.get(list_node, {}).get(list_node, [])
-            this_node = record.get(list_node, {})
-            if not this_node == []:
-                new_json[data_key][i][list_node] = this_node
+def flatten_children(tree, nodes=list()):
+    record = dict(tree)
+    record.pop('children', None)
+    nodes.append(record)
+    if isinstance(tree.get('children'), list):
+        children = tree.get('children')
+        for child in children:
+            if isinstance(child.get('children'), list):
+                flatten_children(child, nodes=nodes)
             else:
-                new_json[data_key][i].pop(list_node)
-        i = i + 1
-    return new_json
+                record = dict(child)
+                record.pop('children', None)
+                nodes.append(record)
 
-def transform_team_tree(this_json, data_key, list_nodes):
-    return this_json
+def transform_team_tree(this_json, data_key):
+    nodes = []
+    for record in list(this_json):
+        flatten_children(record, nodes=nodes)
+    return nodes
 
-# Run other transforms, as needed: denest_list_nodes, transform_conversation_parts
+# Run other transforms, as needed: flatten trees
 def transform_json(this_json, stream_name, data_key):
-    new_json = this_json
-
     # ADD TRANSFORMATIONS
-    # denested = this_json.get(stream_name)
-    list_nodes = []
-    if stream_name == 'agents':
-        # list_nodes = ['teams', 'channels']
-        list_nodes.append('teams')
-        list_nodes.append('channels')
-        denested_json = denest_list_nodes(this_json, data_key, list_nodes)
+    if stream_name in ('team_tree', 'menu_tree'):
+        denested_json = transform_team_tree(this_json, data_key)
     else:
-        denested_json = transform_team_tree(this_json, data_key, list_nodes)
-
-
-
-    # denested_json = denest_list_nodes(this_json, data_key, list_nodes)
+        denested_json = this_json
 
     return denested_json
