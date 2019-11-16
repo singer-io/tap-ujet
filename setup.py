@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 setup(name='tap-ujet',
       version='0.0.1',
       description='Singer.io tap for extracting data from the UJET API',
-      author='scott.coleman@bytecode.io',
+      author='jeff.huth@bytecode.io',
       classifiers=['Programming Language :: Python :: 3 :: Only'],
       py_modules=['tap_ujet'],
       install_requires=[
