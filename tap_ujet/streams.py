@@ -8,10 +8,10 @@
 #   replication_keys: bookmark_field(s), typically a date-time, used for filtering the results
 #        and setting the state
 #   params: Query, sort, and other endpoint specific parameters; default = {}
-#   data_key: JSON element containing the results list for the endpoint; default = root (no data_key)
+#   data_key: JSON element containing the results list for the endpoint;
+#        default = root (no data_key)
 #   bookmark_query_field: From date-time field used for filtering the query
 #   bookmark_type: Data type for bookmark, integer or datetime
-
 
 STREAMS = {
     'agents': {

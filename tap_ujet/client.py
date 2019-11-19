@@ -1,7 +1,7 @@
 import re
 import backoff
 import requests
-from requests.exceptions import ConnectionError
+# from requests.exceptions import ConnectionError
 from singer import metrics, utils
 import singer
 
@@ -130,6 +130,7 @@ class UjetClient(object):
                           Server5xxError,
                           max_tries=5,
                           factor=2)
+    @utils.ratelimit(1, 1.5)
     def check_access(self):
         if self.__company_key is None or self.__company_secret is None:
             raise Exception('Error: Missing company_key or company_secret in config.json.')
@@ -157,8 +158,7 @@ class UjetClient(object):
                           (Server5xxError, ConnectionError, Server429Error),
                           max_tries=7,
                           factor=3)
-    # Todo: document
-    @utils.ratelimit(1, 1)
+    @utils.ratelimit(1, 1.5)
     def request(self, method, path=None, url=None, json=None, version=None, **kwargs):
         if not self.__verified:
             self.__verified = self.check_access()
@@ -208,7 +208,7 @@ class UjetClient(object):
         # Not returning currently due to client API bug
         per_page = total_records = int(response.headers.get('per-page', 0))
         next_url = None
-        if ((response.headers.get('link') is not None ) and ('link' in response.headers)):
+        if ((response.headers.get('link') is not None) and ('link' in response.headers)):
             links = response.headers.get('link').split(',')
             next_url = None
             for link in links:
