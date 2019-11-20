@@ -1,11 +1,13 @@
-import time
-import math
-import singer
 import json
-from singer import metrics, metadata, Transformer, utils, UNIX_SECONDS_INTEGER_DATETIME_PARSING
+import math
+import time
+
+import singer
+from singer import (UNIX_SECONDS_INTEGER_DATETIME_PARSING, Transformer,
+                    metadata, metrics, utils)
 from singer.utils import strptime_to_utc
-from tap_ujet.transform import transform_json
 from tap_ujet.streams import STREAMS
+from tap_ujet.transform import transform_json
 
 LOGGER = singer.get_logger()
 
@@ -267,9 +269,9 @@ def get_selected_fields(catalog, stream_name):
     mdata_list = singer.metadata.to_list(mdata)
     selected_fields = []
     for entry in mdata_list:
-        field =  None
+        field = None
         try:
-            field =  entry['breadcrumb'][1]
+            field = entry['breadcrumb'][1]
             if entry.get('metadata', {}).get('selected', False):
                 selected_fields.append(field)
         except IndexError:
