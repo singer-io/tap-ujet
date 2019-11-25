@@ -13,6 +13,13 @@ setup(name='tap-ujet',
           'requests==2.22.0',
           'singer-python==5.8.1'
       ],
+      extras_require={
+          'dev': [
+              'pylint',
+              'ipdb',
+              'nose'
+          ]
+      },
       entry_points='''
           [console_scripts]
           tap-ujet=tap_ujet:main
