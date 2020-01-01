@@ -3,10 +3,10 @@
   "additionalProperties": false,
   "properties": {
     "activity": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "agent_id": {
-      "type": "integer"
+      "type": ["null", "integer"]
     },
     "call_id": {
       "type": ["null", "integer"]
@@ -32,16 +32,16 @@
       "additionalProperties": false,
       "properties": {
         "color": {
-          "type": "string"
+          "type": ["null", "string"]
         },
         "id": {
-          "type": "integer"
+          "type": ["null", "integer"]
         },
         "name": {
-          "type": "string"
+          "type": ["null", "string"]
         },
         "wfm_id": {
-          "type": "integer"
+          "type": ["null", "integer"]
         }
       }
     },

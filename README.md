@@ -37,14 +37,62 @@ This tap:
 - Primary key fields: id
 - Foreign key fields: teams > id
 - Replication strategy: INCREMENTAL (query filtered)
-  - Bookmark: status_updated_at
-  - Bookmark query field: status_updated_at[from]
+  - Bookmark: started_at
+  - Bookmark query field: started_at[from]
 - Transformations: none
 
-**ADD OTHER ENDPOINTS**
+**calls**
+- Endpoint: https://{subdomain}.ujet.co/manager/api/v1/calls
+- Primary key fields: id
+- Foreign key fields: teams > id
+- Replication strategy: INCREMENTAL (query filtered)
+  - Bookmark: updated_at
+  - Bookmark query field: updated_at[from]
+- Transformations: none
 
+**chats**
+- Endpoint: https://{subdomain}.ujet.co/manager/api/v1/chats
+- Primary key fields: id
+- Foreign key fields: teams > id
+- Replication strategy: INCREMENTAL (query filtered)
+  - Bookmark: updated_at
+  - Bookmark query field: updated_at[from]
+- Transformations: none
 
-## Authentication
+**menu_tree**
+- Endpoint: https://{subdomain}.ujet.co/manager/api/v1/menu/tree
+- Primary key fields: id
+- Foreign key fields: none
+- Replication strategy: FULL_TABLE
+- Transformations: de-nest all recursive 'children'
+
+**menus**
+- Endpoint: https://{subdomain}.ujet.co/manager/api/v1/menus
+- Primary key fields: id
+- Foreign key fields: none
+- Replication strategy: FULL_TABLE
+- Transformations: none
+
+**team_tree**
+- Endpoint: https://{subdomain}.ujet.co/manager/api/v1/team/tree
+- Primary key fields: id
+- Foreign key fields: none
+- Replication strategy: FULL_TABLE
+- Transformations: de-nest all recursive 'children'
+
+**teams**
+- Endpoint: https://{subdomain}.ujet.co/manager/api/v1/teams
+- Primary key fields: id
+- Foreign key fields: none
+- Replication strategy: FULL_TABLE
+- Transformations: none
+
+**user_statuses**
+- Endpoint: https://{subdomain}.ujet.co/manager/api/v1/user_statuses
+- Primary key fields: id
+- Foreign key fields: none
+- Replication strategy: FULL_TABLE
+- Transformations: none
 
 
 ## Quick Start
@@ -73,7 +121,7 @@ This tap:
     - [singer-tools](https://github.com/singer-io/singer-tools)
     - [target-stitch](https://github.com/singer-io/target-stitch)
 
-3. Create your tap's `config.json` file. The `server_subdomain` is everything before `.ujet.com.` in the ujet URL.  The `account_name` is everything between `.ujet.com.` and `api` in the ujet URL. The `date_window_size` is the integer number of days (between the from and to dates) for date-windowing through the date-filtered endpoints (default = 60).
+3. Create your tap's `config.json` file. The `server_subdomain` is everything before `.ujet.com.` in the ujet URL.  The `account_name` is everything between `.ujet.com.` and `api` in the ujet URL..
 
     ```json
     {
@@ -82,8 +130,7 @@ This tap:
         "subdomain": "YOUR_COMPANY",
         "domain": "ujet",
         "start_date": "2019-01-01T00:00:00Z",
-        "user_agent": "tap-ujet <api_user_email@your_company.com>",
-        "date_window_size": "14"
+        "user_agent": "tap-ujet <api_user_email@your_company.com>"
     }
     ```
     
@@ -147,21 +194,28 @@ This tap:
     ```
     Check tap resulted in the following:
     ```bash
-    TBD LATER
+      Checking stdin for valid Singer-formatted data
+      The output is valid.
+      It contained 3704 messages for 9 streams.
 
-    The output is valid.
-    It contained 127 messages for 10 streams.
+            9 schema messages
+         3640 record messages
+           55 state messages
 
-        10 schema messages
-        92 record messages
-        25 state messages
-
-    Details by stream:
-    +---------------------+---------+---------+
-    | stream              | records | schemas |
-    +---------------------+---------+---------+
-    | TBD                 | 99      | 1       |
-    +---------------------+---------+---------+
+      Details by stream:
+      +---------------------+---------+---------+
+      | stream              | records | schemas |
+      +---------------------+---------+---------+
+      | agent_activity_logs | 3148    | 1       |
+      | agents              | 28      | 1       |
+      | menus               | 50      | 1       |
+      | teams               | 5       | 1       |
+      | team_tree           | 5       | 1       |
+      | menu_tree           | 34      | 1       |
+      | chats               | 0       | 1       |
+      | calls               | 356     | 1       |
+      | user_statuses       | 14      | 1       |
+      +---------------------+---------+---------+
     ```
 ---
 

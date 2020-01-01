@@ -17,8 +17,7 @@ REQUIRED_CONFIG_KEYS = [
     'subdomain',
     'domain',
     'start_date',
-    'user_agent',
-    'date_window_size'
+    'user_agent'
 ]
 
 

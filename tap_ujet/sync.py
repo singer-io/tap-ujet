@@ -1,11 +1,6 @@
-import json
-import math
-import time
-
 import singer
 from singer import (UNIX_SECONDS_INTEGER_DATETIME_PARSING, Transformer,
                     metadata, metrics, utils)
-from singer.utils import strptime_to_utc
 from tap_ujet.streams import STREAMS
 from tap_ujet.transform import transform_json
 
@@ -52,7 +47,7 @@ def write_bookmark(state, stream, value):
 # def transform_datetime(this_dttm):
 def transform_datetime(this_dttm):
     with Transformer() as transformer:
-        new_dttm = transformer._transform_datetime(this_dttm)
+        new_dttm = transformer._transform_datetime(this_dttm) # pylint: disable=protected-access
     return new_dttm
 
 
@@ -119,14 +114,10 @@ def sync_endpoint(client, #pylint: disable=too-many-branches
                   start_date,
                   stream_name,
                   path,
-                  endpoint_config,
                   static_params,
                   bookmark_query_field=None,
                   bookmark_field=None,
                   bookmark_type=None,
-                  data_key=None,
-                  id_fields=None,
-                  selected_streams=None,
                   parent=None,
                   parent_id=None):
 
@@ -140,15 +131,11 @@ def sync_endpoint(client, #pylint: disable=too-many-branches
     else:
         last_datetime = get_bookmark(state, stream_name, start_date)
         max_bookmark_value = last_datetime
-        max_bookmark_dttm = strptime_to_utc(last_datetime)
-        max_bookmark_int = int(time.mktime(max_bookmark_dttm.timetuple()))
-        now_int = int(time.time())
-        updated_since_sec = now_int - max_bookmark_int
-        updated_since_days = math.ceil(updated_since_sec/(24 * 60 * 60))
 
     # pagination: loop thru all pages of data using next_url (if not None)
     page = 1
     offset = 0
+    to_rec = 0
     limit = 100 # Default per_page limit is 100
     total_endpoint_records = 0
     next_url = '{}/{}'.format(client.base_url, path)
@@ -195,17 +182,12 @@ def sync_endpoint(client, #pylint: disable=too-many-branches
         # Transform data with transform_json from transform.py
         # The data_key identifies the array/list of records below the <root> element
         transformed_data = [] # initialize the record list
-        data_list = []
-        # data_dict = {}
-        if isinstance(data, list) and not data_key in data:
-            data_list = data
-            transformed_data = transform_json(data, stream_name, data_key)
+        if isinstance(data, list):
+            transformed_data = transform_json(data, stream_name)
 
         if not transformed_data or transformed_data is None:
             LOGGER.info('No transformed data for data = {}'.format(data))
             return total_endpoint_records # No data results
-
-        total_submitted_records = len(transformed_data)
 
         rec_count = 0
 
@@ -232,14 +214,18 @@ def sync_endpoint(client, #pylint: disable=too-many-branches
             write_bookmark(state, stream_name, max_bookmark_value)
 
         # to_rec: to record; ending record for the batch page
-        to_rec = offset + rec_count
-        LOGGER.info('Synced Stream: {}, page: {}, records: {} to {}'.format(
+        to_rec = offset + len(data)
+        LOGGER.info('Synced Stream: {}, page: {}, records: {} to {} of {}'.format(
             stream_name,
             page,
             offset,
-            to_rec))
+            to_rec,
+            total_endpoint_records))
         # Pagination: increment the offset by the limit (batch-size) and page
-        offset = offset + rec_count
+        if not next_url:
+            offset = offset + len(data)
+        else:
+            offset = offset + limit
         page = page + 1
 
     # Return total_endpoint_records across all pages
@@ -311,14 +297,10 @@ def sync(client, config, catalog, state):
             start_date=start_date,
             stream_name=stream_name,
             path=path,
-            endpoint_config=endpoint_config,
             static_params=endpoint_config.get('params', {}),
             bookmark_query_field=endpoint_config.get('bookmark_query_field', None),
             bookmark_field=bookmark_field,
-            bookmark_type=endpoint_config.get('bookmark_type', None),
-            data_key=endpoint_config.get('data_key', stream_name),
-            id_fields=endpoint_config.get('key_properties'),
-            selected_streams=selected_streams)
+            bookmark_type=endpoint_config.get('bookmark_type', None))
 
         update_currently_syncing(state, None)
         LOGGER.info('FINISHED Syncing: {}, total_records: {}'.format(

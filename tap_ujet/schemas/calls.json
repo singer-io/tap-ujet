@@ -60,6 +60,7 @@
         {
           "type": "array",
           "items": {
+            "additionalProperties": false,
             "type": ["null", "object"],
             "properties": {
               "id": {
@@ -242,7 +243,18 @@
     },
     "videos": {
       "type": "array",
-      "items": {}
+      "items": {
+        "additionalProperties": false,
+        "type": ["null", "object"],
+        "properties": {
+          "id": {
+            "type": ["null", "integer"]
+          },
+          "url": {
+            "type": ["null", "string"]
+          }
+        }
+      }
     },
     "scheduled_at": {
       "type": ["null", "string"],
@@ -257,13 +269,14 @@
           "type": "array",
           "items": {
             "type": ["null", "object"],
-             "additionalProperties": false,
+            "additionalProperties": false,
             "properties": {
               "deflection": {
                 "type": ["null", "string"]
               },
               "from_agent": {
                 "type": ["null", "object"],
+                "additionalProperties": false,
                 "properties": {
                   "first_name": {
                     "type": ["null", "string"]
@@ -272,7 +285,7 @@
                     "type": ["null", "string"]
                   },
                   "agent_number": {
-                    "type": "null"
+                    "type": ["null", "integer"]
                   },
                   "id": {
                     "type": ["null", "integer"]
@@ -284,8 +297,7 @@
                     "type": ["null", "string"],
                     "format": "uri"
                   }
-                },
-                "additionalProperties": false
+                }
               },
               "to_queue_priority_level": {
                 "type": ["null", "string"]
@@ -310,7 +322,7 @@
                     "type": ["null", "string"]
                   },
                   "agent_number": {
-                    "type": "null"
+                    "type": ["null", "integer"]
                   },
                   "id": {
                     "type": ["null", "integer"]
@@ -432,7 +444,21 @@
       "anyOf": [
         {
           "type": "array",
-          "items": {}
+          "items": {
+            "additionalProperties": false,
+            "type": ["null", "object"],
+            "properties": {
+              "id": {
+                "type": ["null", "integer"]
+              },
+              "photo_type": {
+                "type": ["null", "string"]
+              },
+              "url": {
+                "type": ["null", "string"]
+              }
+            }
+          }
         },
         {
           "type": "null"
