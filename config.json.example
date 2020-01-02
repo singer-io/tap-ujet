@@ -4,7 +4,6 @@
   "subdomain": "YOUR_COMPANY",
   "domain": "ujet",
   "start_date": "2019-01-01T00:00:00Z",
-  "user_agent": "tap-ujet <api_user_email@your_company.com>",
-  "date_window_size": "14"
+  "user_agent": "tap-ujet <api_user_email@your_company.com>"
 }
 
