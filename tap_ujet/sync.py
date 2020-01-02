@@ -189,8 +189,6 @@ def sync_endpoint(client, #pylint: disable=too-many-branches
             LOGGER.info('No transformed data for data = {}'.format(data))
             return total_endpoint_records # No data results
 
-        rec_count = 0
-
         # Process records and get the max_bookmark_value and record_count for the set of records
         max_bookmark_value, record_count = process_records(
             catalog=catalog,
