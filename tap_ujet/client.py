@@ -97,11 +97,6 @@ def raise_for_error(response):
 
 
 class UjetClient(object):
-    """UjetClient"""
-
-    # pylint: disable=too-many-instance-attributes
-    # Eight is reasonable in this case.
-
     def __init__(self,
                  company_key,
                  company_secret,
@@ -163,11 +158,6 @@ class UjetClient(object):
                           factor=3)
     @utils.ratelimit(1, 1.5)
     def request(self, method, path=None, url=None, json=None, version=None, **kwargs):
-        """Perform HTTP request"""
-
-        # pylint: disable=too-many-branches
-        # Eight is reasonable in this case.
-
         if not self.__verified:
             self.__verified = self.check_access()
 
