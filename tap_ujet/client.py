@@ -1,7 +1,6 @@
 import re
 import backoff
 import requests
-# from requests.exceptions import ConnectionError
 from singer import metrics, utils
 import singer
 
@@ -149,9 +148,8 @@ class UjetClient(object):
             auth=(self.__company_key, self.__company_secret))
         if response.status_code != 200:
             LOGGER.error('Error status_code = {}'.format(response.status_code))
-            raise_for_error(response)
-        else:
-            return True
+            return False
+        return True
 
 
     @backoff.on_exception(backoff.expo,
@@ -178,8 +176,7 @@ class UjetClient(object):
         if 'headers' not in kwargs:
             kwargs['headers'] = {}
 
-        # Version represents API version (e.g. v2): https://api.Ujet.com/?http#versioning
-        kwargs['headers']['Accept'] = 'application/vnd.json'.format(version)
+        kwargs['headers']['Accept'] = 'application/vnd.json'
 
         if self.__user_agent:
             kwargs['headers']['User-Agent'] = self.__user_agent
@@ -206,7 +203,6 @@ class UjetClient(object):
         total_records = int(response.headers.get('total', 0))
 
         # Not returning currently due to client API bug
-        per_page = total_records = int(response.headers.get('per-page', 0))
         next_url = None
         if ((response.headers.get('link') is not None) and ('link' in response.headers)):
             links = response.headers.get('link').split(',')

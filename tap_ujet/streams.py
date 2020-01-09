@@ -13,6 +13,7 @@
 #   bookmark_query_field: From date-time field used for filtering the query
 #   bookmark_type: Data type for bookmark, integer or datetime
 
+
 STREAMS = {
     'agents': {
         'key_properties': ['id'],
@@ -39,22 +40,22 @@ STREAMS = {
     'calls': {
         'key_properties': ['id'],
         'replication_method': 'INCREMENTAL',
-        'replication_keys': ['created_at'],
-        'bookmark_query_field': 'created_at[from]',
+        'replication_keys': ['updated_at'],
+        'bookmark_query_field': 'updated_at[from]',
         'bookmark_type': 'datetime',
         'params': {
-            'sort_column': 'created_at',
+            'sort_column': 'updated_at',
             'sort_direction': 'ASC'
         }
     },
     'chats': {
         'key_properties': ['id'],
         'replication_method': 'INCREMENTAL',
-        'replication_keys': ['created_at'],
-        'bookmark_query_field': 'created_at[from]',
+        'replication_keys': ['updated_at'],
+        'bookmark_query_field': 'updated_at[from]',
         'bookmark_type': 'datetime',
         'params': {
-            'sort_column': 'created_at',
+            'sort_column': 'updated_at',
             'sort_direction': 'ASC'
         }
     },

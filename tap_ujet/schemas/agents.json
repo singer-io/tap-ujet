@@ -59,7 +59,8 @@
       "type": ["null", "integer"]
     },
     "created_at": {
-      "type": ["null", "string"]
+      "type": ["null", "string"],
+      "format": "date-time"
     },
     "crm_authenticated": {
       "type": "boolean"
@@ -74,7 +75,8 @@
       "type": ["null", "integer"]
     },
     "last_login_time": {
-      "type": ["null", "string"]
+      "type": ["null", "string"],
+      "format": "date-time"
     },
     "last_name": {
       "type": ["null", "string"]
@@ -119,7 +121,8 @@
       "type": ["null", "object"]
     },
     "status_updated_at": {
-      "type": ["null", "string"]
+      "type": ["null", "string"],
+      "format": "date-time"
     },
     "teams": {
       "anyOf": [
