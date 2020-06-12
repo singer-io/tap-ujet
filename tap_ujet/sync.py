@@ -152,10 +152,7 @@ def sync_endpoint(client, #pylint: disable=too-many-branches
         # querystring: Squash query params into string
         if page == 1:
             if bookmark_query_field:
-                if bookmark_type == 'datetime':
-                    params[bookmark_query_field] = start_date
-                elif bookmark_type == 'integer':
-                    params[bookmark_query_field] = last_integer
+                params[bookmark_query_field] = max_bookmark_value
             if params != {}:
                 querystring = '&'.join(['%s=%s' % (key, value) for (key, value) in params.items()])
         else:
