@@ -11,3 +11,6 @@
   * Fix bookmark config for calls stream
   * Fix pagination logging in sync
   * Update documentation
+  
+## 0.0.3
+  * Fix for incremental bookmark query param
