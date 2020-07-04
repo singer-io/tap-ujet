@@ -63,7 +63,7 @@
       "format": "date-time"
     },
     "crm_authenticated": {
-      "type": "boolean"
+      "type": ["null", "boolean"]
     },
     "email": {
       "type": ["null", "string"]

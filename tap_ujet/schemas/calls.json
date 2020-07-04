@@ -242,19 +242,26 @@
       "format": "uri"
     },
     "videos": {
-      "type": "array",
-      "items": {
-        "additionalProperties": false,
-        "type": ["null", "object"],
-        "properties": {
-          "id": {
-            "type": ["null", "integer"]
-          },
-          "url": {
-            "type": ["null", "string"]
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": ["null", "object"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": ["null", "integer"]
+              },
+              "url": {
+                "type": ["null", "string"]
+              }
+            }
           }
+        },
+        {
+          "type": "null"
         }
-      }
+      ]
     },
     "scheduled_at": {
       "type": ["null", "string"],
@@ -306,7 +313,7 @@
                 "type": ["null", "string"]
               },
               "from_queue_priority_level": {
-                "type": "null"
+                "type": ["null", "integer"]
               },
               "connected_at": {
                 "type": ["null", "string"],
@@ -423,7 +430,7 @@
       }
     },
     "verified": {
-      "type": "boolean"
+      "type": ["null", "boolean"]
     },
     "menu_path": {
       "type": ["object", "null"],

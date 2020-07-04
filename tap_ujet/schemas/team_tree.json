@@ -18,7 +18,7 @@
       "type": ["null", "integer"]
     },
     "deleted": {
-      "type": "boolean"
+      "type": ["null", "boolean"]
     }
   }
 }
