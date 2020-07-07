@@ -14,3 +14,6 @@
   
 ## 0.0.3
   * Fix for incremental bookmark query param
+  
+## 0.0.4
+  * Fix [ISSUE #5: Errors During Transform](https://github.com/singer-io/tap-ujet/issues/5); JSON schema null handling.
