@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1
+  * Dependabot update [#8](https://github.com/singer-io/tap-ujet/pull/8)
+
 ## 1.0.0
   * Releasing
 
