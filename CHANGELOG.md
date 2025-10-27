@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.0
+  * Update libraries [#09](https://github.com/singer-io/tap-ujet/pull/09)
+
 ## 1.0.0
   * Releasing
 
