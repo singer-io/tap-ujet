@@ -2,21 +2,21 @@ version: 2
 jobs:
   build:
     docker:
-      - image: 218546966473.dkr.ecr.us-east-1.amazonaws.com/circle-ci:tap-tester
+      - image: 218546966473.dkr.ecr.us-east-1.amazonaws.com/circle-ci:stitch-tap-tester-uv
     steps:
       - checkout
       - run:
           name: 'Setup virtual env'
           command: |
-            python3 -mvenv /usr/local/share/virtualenvs/tap-ujet
+            uv venv --python 3.9 /usr/local/share/virtualenvs/tap-ujet
             source /usr/local/share/virtualenvs/tap-ujet/bin/activate
-            pip install -U 'pip<19.2' setuptools
-            pip install .[dev]
+            uv pip install -U 'pip<19.2' setuptools
+            uv pip install .[dev]
       - run:
           name: 'pylint'
           command: |
             source /usr/local/share/virtualenvs/tap-ujet/bin/activate
-            make test
+            pylint tap_ujet --disable missing-docstring,missing-class-docstring,missing-module-docstring,missing-function-docstring,too-many-instance-attributes,trailing-whitespace,bare-except,logging-format-interpolation,too-many-arguments,too-many-locals,protected-access,unused-argument,unused-argument,too-many-statements,unused-import,dangerous-default-value,useless-object-inheritance,inconsistent-return-statements,unused-variable,no-else-raise,too-many-format-args,too-many-branches,too-many-positional-arguments,consider-using-f-string,raise-missing-from,broad-exception-raised,unspecified-encoding
 
 workflows:
   version: 2

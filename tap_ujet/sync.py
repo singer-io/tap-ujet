@@ -150,13 +150,13 @@ def sync_endpoint(client, #pylint: disable=too-many-branches
     while next_url is not None:
         # Need URL querystring for 1st page; subsequent pages provided by next_url
         # querystring: Squash query params into string
+        querystring = None
         if page == 1:
             if bookmark_query_field:
                 params[bookmark_query_field] = max_bookmark_value
             if params != {}:
                 querystring = '&'.join(['%s=%s' % (key, value) for (key, value) in params.items()])
-        else:
-            querystring = None
+
         LOGGER.info('URL for Stream {}: {}{}'.format(
             stream_name,
             next_url,
@@ -260,8 +260,7 @@ def get_selected_fields(catalog, stream_name):
     return selected_fields
 
 def sync(client, config, catalog, state):
-    if 'start_date' in config:
-        start_date = config['start_date']
+    start_date = config.get('start_date', None)
 
     # Get selected_streams from catalog, based on state last_stream
     #   last_stream = Previous currently synced stream, if the load was interrupted
