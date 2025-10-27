@@ -30,6 +30,7 @@ STREAMS = {
         'key_properties': ['id'],
         'replication_method': 'INCREMENTAL',
         'replication_keys': ['started_at'],
+        'parent': 'agents',
         'bookmark_query_field': 'started_at[from]',
         'bookmark_type': 'datetime',
         'params': {
@@ -63,6 +64,7 @@ STREAMS = {
         'path': 'menus/tree',
         'key_properties': ['id'],
         'replication_method': 'FULL_TABLE',
+        'parent': 'menus',
     },
     'menus': {
         'key_properties': ['id'],
@@ -76,6 +78,7 @@ STREAMS = {
         'path': 'teams/tree',
         'key_properties': ['id'],
         'replication_method': 'FULL_TABLE',
+        'parent': 'teams',
     },
     'user_statuses': {
         'key_properties': ['id'],

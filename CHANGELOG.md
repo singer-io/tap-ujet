@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.0
+  * Add parent-tap-stream-id metadata for parent-child relationships [#11](https://github.com/singer-io/tap-ujet/pull/11)
+
 ## 1.1.0
   * Update libraries [#09](https://github.com/singer-io/tap-ujet/pull/09)
 
