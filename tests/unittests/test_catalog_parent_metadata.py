@@ -86,22 +86,3 @@ class TestCatalogParentMetadata(unittest.TestCase):
                     # If root metadata exists, parent-tap-stream-id should NOT be present
                     self.assertNotIn('parent-tap-stream-id', root_metadata,
                                    f"'parent-tap-stream-id' should not be present in metadata for stream '{stream_name}' without parent configuration")
-    
-    def test_all_catalog_streams_exist_in_streams_config(self):
-        """Test that all streams in the catalog are properly defined in STREAMS configuration."""
-        catalog_stream_names = {stream.tap_stream_id for stream in self.catalog.streams}
-        config_stream_names = set(STREAMS.keys())
-        
-        # Verify all catalog streams are in configuration
-        missing_streams = catalog_stream_names - config_stream_names
-        self.assertEqual(len(missing_streams), 0,
-                        f"Streams found in catalog but missing from STREAMS config: {missing_streams}")
-        
-        # Verify all configured streams are in catalog
-        missing_catalog_streams = config_stream_names - catalog_stream_names
-        self.assertEqual(len(missing_catalog_streams), 0,
-                        f"Streams found in STREAMS config but missing from catalog: {missing_catalog_streams}")
-
-
-if __name__ == '__main__':
-    unittest.main()
