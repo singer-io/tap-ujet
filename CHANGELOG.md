@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1
+  * Bump dependency versions [#12](https://github.com/singer-io/tap-ujet/pull/12)
+
 ## 1.0.0
   * Releasing
 
