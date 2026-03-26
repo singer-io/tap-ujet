@@ -10,7 +10,7 @@ setup(name='tap-ujet',
       py_modules=['tap_ujet'],
       install_requires=[
           'backoff==1.10.0',
-          'requests==2.32.5',
+          'requests==2.33.0',
           'singer-python==5.14.3'
       ],
       extras_require={
