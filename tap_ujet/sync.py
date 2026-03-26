@@ -85,8 +85,7 @@ def process_records(catalog, #pylint: disable=too-many-branches
                     if max_bookmark_value is None:
                         max_bookmark_value = bookmark_val
                     elif bookmark_type == 'integer':
-                        if bookmark_val > max_bookmark_value:
-                            max_bookmark_value = bookmark_val
+                        max_bookmark_value = max(max_bookmark_value, bookmark_val)
                     else:
                         if bookmark_val > transform_datetime(max_bookmark_value):
                             max_bookmark_value = bookmark_val
