@@ -8,7 +8,7 @@ jobs:
       - run:
           name: 'Setup virtual env'
           command: |
-            uv venv --python 3.9 /usr/local/share/virtualenvs/tap-ujet
+            uv venv --python 3.12 /usr/local/share/virtualenvs/tap-ujet
             source /usr/local/share/virtualenvs/tap-ujet/bin/activate
             uv pip install -U 'pip' setuptools
             uv pip install .[dev]
@@ -17,6 +17,26 @@ jobs:
           command: |
             source /usr/local/share/virtualenvs/tap-ujet/bin/activate
             pylint tap_ujet --disable missing-docstring,missing-class-docstring,missing-module-docstring,missing-function-docstring,too-many-instance-attributes,trailing-whitespace,bare-except,logging-format-interpolation,too-many-arguments,too-many-locals,protected-access,unused-argument,unused-argument,too-many-statements,unused-import,dangerous-default-value,useless-object-inheritance,inconsistent-return-statements,unused-variable,no-else-raise,too-many-format-args,too-many-branches,too-many-positional-arguments,consider-using-f-string,raise-missing-from,broad-exception-raised,unspecified-encoding
+      - run:
+          name: 'Unit Tests'
+          command: |
+            source /usr/local/share/virtualenvs/tap-ujet/bin/activate
+            uv pip install pytest coverage
+            mkdir -p test_output
+            coverage run -m pytest tests/unittests --junitxml=test_output/report.xml
+            coverage report
+            coverage html
+      - run:
+          name: 'Integration Tests'
+          command: |
+            source /usr/local/share/virtualenvs/tap-tester/bin/activate
+            uv pip install --upgrade awscli
+            uv pip install .
+            uv pip install pytest
+            aws s3 cp s3://com-stitchdata-dev-deployment-assets/environments/tap-tester/tap_tester_sandbox dev_env.sh
+            source dev_env.sh
+            unset USE_STITCH_BACKEND
+            run-test --tap=tap-ujet tests
 
 workflows:
   version: 2
