@@ -6,7 +6,6 @@ Patches UjetClient.get() to supply controlled records; verifies that:
 """
 import unittest
 from unittest.mock import patch, MagicMock, call
-import singer
 
 try:
     from .base import UjetBaseTest
@@ -41,7 +40,6 @@ class UjetBookmarkTest(UjetBaseTest, unittest.TestCase):
             # Determine which stream we're serving
             endpoint = kwargs.get("endpoint", "")
             for stream_name, records in stream_map.items():
-                path_key = stream_name.replace("_", "/") if "/" in stream_name else stream_name
                 if stream_name in (endpoint or "") or stream_name in (url or "") \
                         or stream_name in (path or ""):
                     count = call_counts.get(stream_name, 0)
@@ -218,8 +216,8 @@ class UjetBookmarkTest(UjetBaseTest, unittest.TestCase):
             state=state,
         )
 
-        # singer.write_state is only called by write_bookmark; it must NOT be called
-        # for FULL_TABLE streams (sync code calls write_bookmark only when bookmark_field set)
+        # Even though sync may call singer.write_state for other reasons (e.g., currently_syncing),
+        # FULL_TABLE streams must not persist a bookmark in state.
         team_bookmark = state.get("bookmarks", {}).get("teams")
         self.assertIsNone(team_bookmark)
 
