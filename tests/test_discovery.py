@@ -151,7 +151,3 @@ class UjetDiscoveryTest(UjetBaseTest, unittest.TestCase):
                     for key in rep_keys:
                         self.assertIn(key, props,
                             msg=f"Replication key '{key}' not in '{stream_name}' schema")
-
-
-if __name__ == "__main__":
-    unittest.main()

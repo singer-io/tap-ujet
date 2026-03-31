@@ -164,7 +164,3 @@ class UjetAutomaticFieldsTest(UjetBaseTest, unittest.TestCase):
                 record = self._generate_stream_record(stream_name)
                 self.assertIn("id", record)
                 self.assertIsNotNone(record["id"])
-
-
-if __name__ == "__main__":
-    unittest.main()

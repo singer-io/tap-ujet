@@ -204,7 +204,3 @@ class UjetPaginationTest(UjetBaseTest, unittest.TestCase):
         for stream_name, meta in self.expected_metadata().items():
             with self.subTest(stream=stream_name):
                 self.assertEqual(meta[self.API_LIMIT], 100)
-
-
-if __name__ == "__main__":
-    unittest.main()

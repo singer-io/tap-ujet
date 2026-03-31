@@ -474,7 +474,3 @@ class TestUjetClientContextManager(unittest.TestCase):
             client = UjetClient('k', 's', 'myco', 'ujet', 'agent')
             client.__exit__(None, None, None)
         mock_session.close.assert_called_once()
-
-
-if __name__ == '__main__':
-    unittest.main()

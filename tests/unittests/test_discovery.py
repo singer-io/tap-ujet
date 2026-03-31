@@ -142,7 +142,3 @@ class TestDiscoverGetSchemas(unittest.TestCase):
                 get_schemas()
         finally:
             del STREAMS['nonexistent_stream']
-
-
-if __name__ == '__main__':
-    unittest.main()

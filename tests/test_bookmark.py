@@ -237,7 +237,3 @@ class UjetBookmarkTest(UjetBaseTest, unittest.TestCase):
         client._UjetClient__session = MagicMock()
         client.get = mock_get
         return client
-
-
-if __name__ == "__main__":
-    unittest.main()

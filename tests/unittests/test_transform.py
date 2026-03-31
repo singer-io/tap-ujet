@@ -146,7 +146,3 @@ class TestTransformJson(unittest.TestCase):
         result = transform_json(data, 'teams')
         # Should not flatten - returned as the original list
         self.assertEqual(result, data)
-
-
-if __name__ == '__main__':
-    unittest.main()

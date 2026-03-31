@@ -168,7 +168,3 @@ class UjetAllFieldsTest(UjetBaseTest, unittest.TestCase):
             with self.subTest(stream=stream_name):
                 self.assertIn(stream_name, expected,
                               msg=f"KNOWN_MISSING_FIELDS references unknown stream '{stream_name}'")
-
-
-if __name__ == "__main__":
-    unittest.main()

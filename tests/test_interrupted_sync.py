@@ -241,7 +241,3 @@ class UjetInterruptedSyncTest(UjetBaseTest, unittest.TestCase):
         )
 
         self.assertEqual(mock_write_record.call_count, 1)
-
-
-if __name__ == "__main__":
-    unittest.main()

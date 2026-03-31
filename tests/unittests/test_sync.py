@@ -776,7 +776,3 @@ class TestSync(unittest.TestCase):
 
         # After sync finishes, currently_syncing must not be in state
         self.assertNotIn('currently_syncing', state)
-
-
-if __name__ == '__main__':
-    unittest.main()

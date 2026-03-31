@@ -181,7 +181,3 @@ class UjetStartDateTest(UjetBaseTest, unittest.TestCase):
                         meta[self.OBEYS_START_DATE],
                         msg=f"FULL_TABLE stream '{stream_name}' should not obey start_date",
                     )
-
-
-if __name__ == "__main__":
-    unittest.main()
