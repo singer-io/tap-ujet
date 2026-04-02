@@ -81,9 +81,14 @@ def process_records(catalog, #pylint: disable=too-many-branches
                     stream_metadata)
                 # Reset max_bookmark_value to new value if higher
                 if transformed_record.get(bookmark_field):
-                    if max_bookmark_value is None or \
-                        transformed_record[bookmark_field] > transform_datetime(max_bookmark_value):
-                        max_bookmark_value = transformed_record[bookmark_field]
+                    bookmark_val = transformed_record[bookmark_field]
+                    if max_bookmark_value is None:
+                        max_bookmark_value = bookmark_val
+                    elif bookmark_type == 'integer':
+                        max_bookmark_value = max(max_bookmark_value, bookmark_val)
+                    else:
+                        if bookmark_val > transform_datetime(max_bookmark_value):
+                            max_bookmark_value = bookmark_val
 
                 if bookmark_field and (bookmark_field in transformed_record):
                     if bookmark_type == 'integer':

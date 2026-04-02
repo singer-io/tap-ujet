@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+  * Upgrade Python version to 3.12
+  * Unit tests and Integration tests
+
 ## 1.0.1
   * Bump dependency versions [#12](https://github.com/singer-io/tap-ujet/pull/12)
 

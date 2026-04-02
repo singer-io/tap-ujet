@@ -3,15 +3,15 @@
 from setuptools import setup, find_packages
 
 setup(name='tap-ujet',
-      version='1.0.1',
+      version='1.1.0',
       description='Singer.io tap for extracting data from the UJET API',
       author='jeff.huth@bytecode.io',
       classifiers=['Programming Language :: Python :: 3 :: Only'],
       py_modules=['tap_ujet'],
       install_requires=[
-          'backoff==1.10.0',
-          'requests==2.32.5',
-          'singer-python==5.14.3'
+          'backoff==2.2.1',
+          'requests==2.33.0',
+          'singer-python==6.8.0'
       ],
       extras_require={
           'dev': [
