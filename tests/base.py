@@ -274,10 +274,13 @@ class UjetBaseTest:
     @classmethod
     def _make_catalog(cls):
         """Return a singer Catalog for all streams (used in sync tests)."""
+        from unittest.mock import MagicMock
         from singer import metadata
         from singer.catalog import Catalog, CatalogEntry, Schema
         from tap_ujet.discover import discover
-        catalog = discover()
+        client = MagicMock()
+        client.request.return_value = ([], 0, None)
+        catalog = discover(client)
         # Mark all streams and fields as selected
         for entry in catalog.streams:
             mdata_map = metadata.to_map(entry.metadata)

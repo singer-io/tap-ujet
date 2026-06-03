@@ -40,7 +40,10 @@ class UjetAutomaticFieldsTest(UjetBaseTest, unittest.TestCase):
     @classmethod
     def _make_minimum_selection_catalog(cls):
         """Build a catalog where NO fields are selected — only automatic metadata."""
-        full_catalog = discover()
+        from unittest.mock import MagicMock
+        client = MagicMock()
+        client.request.return_value = ([], 0, None)
+        full_catalog = discover(client)
         for entry in full_catalog.streams:
             mdata_map = metadata.to_map(entry.metadata)
             # Do NOT set selected=True on any field — only automatic metadata present

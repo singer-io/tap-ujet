@@ -18,8 +18,11 @@ class UjetDiscoveryTest(UjetBaseTest, unittest.TestCase):
     """Verify discover() returns a correct Singer Catalog for all streams."""
 
     def _get_catalog(self):
-        """Run discover() — no HTTP calls needed (reads local schema JSON files)."""
-        return discover()
+        """Run discover() with a mock client that grants access to all streams."""
+        from unittest.mock import MagicMock
+        client = MagicMock()
+        client.request.return_value = ([], 0, None)
+        return discover(client)
 
     # ── Stream presence ──────────────────────────────────────────────────
 
