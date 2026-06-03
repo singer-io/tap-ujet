@@ -43,12 +43,15 @@ def _apply_access_checks(client, schemas, field_metadata):
     if inaccessible_streams:
         if len(inaccessible_streams) == len(STREAMS):
             raise UjetForbiddenError(
-                "HTTP-error-code: 403, Error: The account credentials supplied do not have 'read' access to any "
-                "of the streams supported by the tap. Data collection cannot be initiated due to lack of permissions."
+                "HTTP-error-code: 403, Error: The account credentials"
+                " supplied do not have 'read' access to any of the"
+                " streams supported by the tap. Data collection cannot"
+                " be initiated due to lack of permissions."
             )
         LOGGER.warning(
-            "The account credentials supplied do not have 'read' access to the following stream(s): %s. "
-            "These streams have been excluded from the catalog.",
+            "The account credentials supplied do not have 'read'"
+            " access to the following stream(s): %s."
+            " These streams have been excluded from the catalog.",
             ", ".join(inaccessible_streams),
         )
 
