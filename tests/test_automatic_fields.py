@@ -4,7 +4,7 @@ Automatic fields are primary keys + replication keys. All other fields should be
 absent from the emitted records when the stream metadata has no fields selected.
 """
 import unittest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 from singer import metadata
 from singer.catalog import Catalog, CatalogEntry, Schema
