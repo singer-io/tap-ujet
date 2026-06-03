@@ -3,7 +3,7 @@
 Calls the tap's own discover() function directly — no HTTP requests required.
 """
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock
 from singer import metadata
 
 try:
@@ -19,7 +19,6 @@ class UjetDiscoveryTest(UjetBaseTest, unittest.TestCase):
 
     def _get_catalog(self):
         """Run discover() with a mock client that grants access to all streams."""
-        from unittest.mock import MagicMock
         client = MagicMock()
         client.request.return_value = ([], 0, None)
         return discover(client)

@@ -41,7 +41,7 @@ def _apply_access_checks(client, schemas, field_metadata):
         field_metadata.pop(stream_name, None)
 
     if inaccessible_streams:
-        if len(inaccessible_streams) == len(STREAMS):
+        if not schemas:
             raise UjetForbiddenError(
                 "HTTP-error-code: 403, Error: The account credentials"
                 " supplied do not have 'read' access to any of the"
@@ -59,8 +59,8 @@ def _apply_access_checks(client, schemas, field_metadata):
 def discover(client):
     """
     Run the discovery mode, prepare the catalog file and return the catalog.
-    Access to each stream is verified using the provided client and streams
-    the credentials cannot read are excluded from the returned catalog.
+    Access to each stream is verified using the provided client, and streams
+    that the credentials cannot read are excluded from the returned catalog.
     """
     schemas, field_metadata = get_schemas()
     _apply_access_checks(client, schemas, field_metadata)

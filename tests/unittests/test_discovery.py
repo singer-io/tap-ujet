@@ -1,7 +1,7 @@
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock
 
-from singer.catalog import Catalog, CatalogEntry
+from singer.catalog import Catalog
 
 from tap_ujet.discover import discover, _check_stream_access, _apply_access_checks
 from tap_ujet.client import UjetForbiddenError
