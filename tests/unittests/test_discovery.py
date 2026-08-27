@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 from singer.catalog import Catalog
 
@@ -246,8 +246,33 @@ class TestApplyAccessChecks(unittest.TestCase):
 
         from tap_ujet.schema import get_schemas
         schemas, field_metadata = get_schemas()
-        with self.assertRaises(UjetForbiddenError):
+        with self.assertRaises(UjetForbiddenError) as ctx:
             _apply_access_checks(client, schemas, field_metadata)
+        self.assertEqual(
+            str(ctx.exception),
+            "No streams are accessible. Ensure the credentials have read permission for at least one stream."
+        )
+
+    @patch('tap_ujet.discover.LOGGER')
+    def test_inaccessible_streams_logged_as_warning(self, mock_logger):
+        """When some streams are excluded, a warning listing them is logged."""
+        client = MagicMock()
+        def side_effect(method, path=None, **kwargs):
+            if path == 'agents':
+                raise UjetForbiddenError("403 Forbidden")
+            return ([], 0, None)
+        client.request.side_effect = side_effect
+
+        from tap_ujet.schema import get_schemas
+        schemas, field_metadata = get_schemas()
+        _apply_access_checks(client, schemas, field_metadata)
+
+        warning_calls = [
+            call for call in mock_logger.warning.call_args_list
+            if 'Unauthorized streams excluded from catalog' in str(call)
+        ]
+        self.assertEqual(len(warning_calls), 1)
+        self.assertIn('agents', str(warning_calls[0]))
 
     def test_discover_excludes_forbidden_streams(self):
         """discover() should return catalog without forbidden streams."""
