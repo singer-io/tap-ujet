@@ -250,7 +250,9 @@ class TestApplyAccessChecks(unittest.TestCase):
             _apply_access_checks(client, schemas, field_metadata)
         self.assertEqual(
             str(ctx.exception),
-            "No streams are accessible. Ensure the credentials have read permission for at least one stream."
+            "No streams are accessible. "
+            "Ensure the credentials have read permission "
+            "for at least one stream."
         )
 
     @patch('tap_ujet.discover.LOGGER')
