@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.0
+  * Exclude streams returning HTTP 403 from catalog during discovery; if all streams are forbidden, discovery fails with a 403 error.[#15](https://github.com/singer-io/tap-ujet/pull/15)
+
 ## 1.1.0
   * Upgrade Python version to 3.12
   * Unit tests and Integration tests
