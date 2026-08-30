@@ -1,6 +1,6 @@
 import singer
 from singer.catalog import Catalog, CatalogEntry, Schema
-from tap_ujet.client import UjetForbiddenError
+from tap_ujet.client import UjetForbiddenError, UjetUnauthorizedError
 from tap_ujet.schema import get_schemas, STREAMS
 
 LOGGER = singer.get_logger()
@@ -16,7 +16,7 @@ def _check_stream_access(client, stream_name):
     try:
         client.request('GET', path=path, params={'per': 1}, endpoint=stream_name)
         return True
-    except UjetForbiddenError as exc:
+    except (UjetForbiddenError, UjetUnauthorizedError) as exc:
         LOGGER.warning(
             "Unauthorized Stream: %s, excluding from catalog. HTTP-Error-Message:'%s'",
             stream_name,
