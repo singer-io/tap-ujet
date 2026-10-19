@@ -47,7 +47,7 @@ def _apply_access_checks(client, schemas, field_metadata):
             "Ensure the credentials have read permission "
             "for at least one stream."
         )
-    
+
     if inaccessible_streams:
         LOGGER.warning(
             "Unauthorized streams excluded from catalog: %s",
