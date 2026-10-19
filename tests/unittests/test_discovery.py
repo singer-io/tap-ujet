@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 from singer.catalog import Catalog
 
 from tap_ujet.discover import discover, _check_stream_access, _apply_access_checks
-from tap_ujet.client import UjetForbiddenError
+from tap_ujet.client import UjetForbiddenError, UjetUnauthorizedError
 from tap_ujet.streams import STREAMS
 
 
@@ -181,6 +181,14 @@ class TestCheckStreamAccess(unittest.TestCase):
         client.request.side_effect = UjetForbiddenError("403 Forbidden")
         result = _check_stream_access(client, 'agents')
         self.assertFalse(result)
+
+    def test_unauthorized_error_propagates(self):
+        """401 authentication errors must not be handled as stream exclusions."""
+        client = MagicMock()
+        client.request.side_effect = UjetUnauthorizedError("401 Unauthorized")
+
+        with self.assertRaises(UjetUnauthorizedError):
+            _check_stream_access(client, 'agents')
 
     def test_uses_stream_path_override(self):
         """Should use the 'path' config when available (e.g., menus/tree)."""
